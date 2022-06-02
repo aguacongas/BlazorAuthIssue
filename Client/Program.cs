@@ -15,13 +15,12 @@ builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().Cre
 
 builder.Services.AddOidcAuthentication(options =>
 {
-    var providerOptions = options.ProviderOptions;
-    providerOptions.Authority = "https://www.theidserver.com/";
-    providerOptions.ClientId = "blazorissueclient";
-    providerOptions.ResponseType = "code";
-    providerOptions.DefaultScopes.Add("blazorissueapi");
+    // here the binding works.
+    builder.Configuration.Bind(nameof(options.ProviderOptions), options.ProviderOptions);
+    // doesn't work when published
     builder.Configuration.Bind(nameof(options.UserOptions), options.UserOptions);
-}).AddAccountClaimsPrincipalFactory<ClaimsPrincipalFactory>(); ;
+    // options.UserOptions.RoleClaim = "role"; works always.
+}).AddAccountClaimsPrincipalFactory<ClaimsPrincipalFactory>();
 
 builder.Services.AddAuthorizationCore(options => options.AddPolicy("Reader", policy => policy.RequireRole("BlazorIssue-Reader")));
 
