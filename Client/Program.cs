@@ -17,6 +17,8 @@ builder.Services.AddOidcAuthentication(options =>
 {
     // here the binding works.
     builder.Configuration.Bind(nameof(options.ProviderOptions), options.ProviderOptions);
+    // work arround
+    options.UserOptions.RoleClaim = "dummy";
     // doesn't work when published
     builder.Configuration.Bind(nameof(options.UserOptions), options.UserOptions);
     // options.UserOptions.RoleClaim = "role"; works always.
