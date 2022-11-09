@@ -1,9 +1,9 @@
 ﻿@page "/authentication/{action}"
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 
-<RemoteAuthenticatorView Action="@Action" @ref="Child">
+<RemoteAuthenticatorView Action="@Action" @ref="child">
     <Registering>
-        @if (Child?.ApplicationPaths.RemoteRegisterPath == null)
+        @if (child?.ApplicationPaths.RemoteRegisterPath == null)
         {
             <span>Registration is not supported.</span>
         }
@@ -15,7 +15,7 @@
 </RemoteAuthenticatorView>
 
 @code {
-    private RemoteAuthenticatorView? Child;
+    private RemoteAuthenticatorView? child;
 
     [Parameter]
     public string? Action { get; set; }
