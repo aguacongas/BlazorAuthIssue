@@ -1,28 +1,10 @@
 ﻿@page "/authentication/{action}"
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 
-<RemoteAuthenticatorView Action="@Action" @ref="child">
-    <Registering>
-        @if (child?.ApplicationPaths.RemoteRegisterPath == null)
-        {
-            <span>Registration is not supported.</span>
-        }
-        else
-        {
-            <span>Checking login state...</span>
-        }
-    </Registering>
-</RemoteAuthenticatorView>
+<RemoteAuthenticatorView Action="@Action" />
 
 @code {
-    private RemoteAuthenticatorView? child;
-
     [Parameter]
     public string? Action { get; set; }
-
-    protected override void OnInitialized()
-    {
-        base.OnInitialized();
-    }
 }
 
